@@ -37,7 +37,7 @@ export function InputBar({ onSend, disabled = false }: InputBarProps) {
 
   return (
     <div className="border-t border-warm-border bg-background/80 backdrop-blur-sm p-4 pb-6 md:pb-4">
-      <div className="flex items-end gap-3 max-w-3xl mx-auto">
+      <div className="flex items-center gap-3 max-w-3xl mx-auto">
         <div className="flex-1 relative">
           <textarea
             ref={textareaRef}
@@ -47,10 +47,9 @@ export function InputBar({ onSend, disabled = false }: InputBarProps) {
             placeholder="State a belief, claim, or question..."
             disabled={disabled}
             rows={1}
-            className="w-full resize-none rounded-2xl border border-warm-border bg-card px-4 py-3 text-[16px] leading-[1.75] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-warm-brown/20 focus:border-warm-brown/30 transition-all disabled:opacity-50"
+            className="w-full resize-none rounded-2xl border border-warm-border bg-card px-4 py-3 text-[16px] leading-[1.75] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all disabled:opacity-50"
           />
         </div>
-        {/* Send button - dark charcoal pill */}
         <Button
           onClick={handleSubmit}
           disabled={!value.trim() || disabled}

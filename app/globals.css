@@ -13,8 +13,8 @@
   --card-foreground: oklch(0.25 0.01 60);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.25 0.01 60);
-  /* Primary - dark charcoal #1C1C1C */
-  --primary: oklch(0.2 0 0);
+  /* Primary - warm terracotta (Claude orange) */
+  --primary: oklch(0.637 0.147 42);
   --primary-foreground: oklch(1 0 0);
   /* Secondary - warm sand #F0E6D3 */
   --secondary: oklch(0.93 0.025 80);
@@ -40,7 +40,7 @@
   /* Sidebar - warmer #F5F0E8 */
   --sidebar: oklch(0.96 0.012 80);
   --sidebar-foreground: oklch(0.25 0.01 60);
-  --sidebar-primary: oklch(0.2 0 0);
+  --sidebar-primary: oklch(0.637 0.147 42);
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.93 0.025 80);
   --sidebar-accent-foreground: oklch(0.25 0.01 60);

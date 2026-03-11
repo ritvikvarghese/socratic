@@ -32,7 +32,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
       <nav>
         <Link
           href="/insights"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="font-serif text-lg font-light tracking-[0.05em] text-muted-foreground hover:text-foreground transition-colors"
         >
           Insights
         </Link>
