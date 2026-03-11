@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, X, Trash2 } from "lucide-react";
+import { Plus, X, Trash2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface DebateSession {
@@ -148,6 +148,20 @@ export function Sidebar({
               No debates yet. Start your first examination.
             </p>
           )}
+        </div>
+
+        {/* Log out */}
+        <div className="p-4 border-t border-warm-border">
+          <button
+            onClick={() => {
+              sessionStorage.removeItem("examined_auth");
+              window.location.reload();
+            }}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full px-3 py-2 rounded-lg hover:bg-muted/50"
+          >
+            <LogOut className="h-4 w-4" />
+            Log out
+          </button>
         </div>
       </aside>
     </>
