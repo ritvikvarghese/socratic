@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Conversation {
+  id        String   @id @default(uuid()) @db.Uuid
+  title     String?
+  summary   String?
+  topicTags String[] @map("topic_tags")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  userId    String   @default("default_user") @map("user_id")
+  messages  Message[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(uuid()) @db.Uuid
+  conversationId String       @map("conversation_id") @db.Uuid
+  role           String
+  content        String
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model InsightsCache {
+  id       String   @id @default(uuid()) @db.Uuid
+  type     String
+  label    String
+  count    Int
+  lastSeen DateTime @map("last_seen") @db.Timestamptz
+  userId   String   @default("default_user") @map("user_id")
+
+  @@map("insights_cache")
+}
