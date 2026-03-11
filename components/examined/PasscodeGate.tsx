@@ -61,7 +61,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <h1 className="font-serif text-5xl font-light tracking-[0.05em] text-white mb-2">
+        <h1 className="preserve-case font-serif text-5xl font-light tracking-[0.05em] text-white mb-2">
           Socratic
         </h1>
         <p className="text-white/70 text-sm italic mb-8">

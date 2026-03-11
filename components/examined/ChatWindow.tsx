@@ -28,7 +28,7 @@ export function ChatWindow({
         {messages.length === 0 ? (
           // Empty state - centered, minimal, philosophical
           <div className="h-full flex flex-col items-center justify-center text-center">
-            <h2 className="font-serif text-4xl md:text-5xl font-light tracking-[0.05em] text-foreground mb-4">
+            <h2 className="preserve-case font-serif text-4xl md:text-5xl font-light tracking-[0.05em] text-foreground mb-4">
               Socratic
             </h2>
             <p className="text-muted-foreground text-lg font-light">

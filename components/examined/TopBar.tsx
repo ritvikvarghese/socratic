@@ -24,7 +24,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
         </Button>
         
         {/* Logo - Cormorant Garamond, thin weight, letter-spacing */}
-        <h1 className="font-serif text-2xl font-light tracking-[0.05em] text-foreground">
+        <h1 className="preserve-case font-serif text-2xl font-light tracking-[0.05em] text-foreground">
           Socratic
         </h1>
       </div>

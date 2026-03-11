@@ -54,7 +54,7 @@ export default function InsightsPage() {
           Insights
         </h1>
         <p className="text-muted-foreground text-sm mb-8">
-          Patterns across your Socratic examinations
+          patterns across your Socratic examinations
         </p>
 
         {loading && (

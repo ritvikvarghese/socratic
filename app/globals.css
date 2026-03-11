@@ -141,7 +141,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    text-transform: lowercase;
   }
+}
+
+.preserve-case {
+  text-transform: none;
 }
 
 /* Subtle dot grid background pattern */
