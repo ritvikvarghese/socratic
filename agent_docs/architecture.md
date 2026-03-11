@@ -43,6 +43,6 @@ A single-user Socratic debate tool built as a Next.js 16 App Router application.
 | Railway | PostgreSQL database hosting + deployment | `.env.local` (`DATABASE_URL`) |
 
 ## What Not to Touch
-- `app/globals.css` — Design system tokens. Changes here affect the entire app's visual identity.
+- `app/globals.css` — Design system tokens live here. Changes affect the entire app's visual identity, so be deliberate — but plugin imports and minor additions are fine.
 - `components/ui/` — Auto-generated shadcn components. Use `pnpm dlx shadcn@latest add` to add new ones.
 - `lib/anthropic.ts` system prompt — The core product logic. Changes should be deliberate and discussed.

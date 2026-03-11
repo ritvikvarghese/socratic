@@ -71,3 +71,13 @@ Key decisions made and why. Read this every session.
 **Alternatives considered:** Keep Supabase for DB hosting + Vercel for deployment — rejected because Railway provides both PostgreSQL and container deployment in one platform, reducing complexity.
 **Why:** Fewer moving parts. Railway gives us PostgreSQL + Docker deployment in one dashboard. The Supabase client was dead code. Vercel Analytics added no value.
 **Consequences:** Removed `@supabase/supabase-js`, `@vercel/analytics`, and `lib/supabase.ts`. Added `Dockerfile` and `output: 'standalone'` to Next.js config. All env vars simplified to `ANTHROPIC_API_KEY`, `DATABASE_URL`, `PASSCODE`.
+
+---
+
+**Date:** 2026-03-11
+**Status:** Accepted
+**Decision:** Use react-markdown for assistant messages only
+**Context / trigger:** Assistant responses contain markdown (bold, italic, lists) but MessageBubble rendered everything as plain text in a `<p>` tag.
+**Alternatives considered:** (1) Custom regex-based parsing — rejected, too fragile. (2) Applying markdown to all messages — rejected, user messages are short plain text and don't need it.
+**Why:** `react-markdown` is the standard React solution. Scoping to assistant messages keeps user bubbles simple and avoids unexpected formatting from user input.
+**Consequences:** Added `react-markdown` and `@tailwindcss/typography` as dependencies. Added `@plugin '@tailwindcss/typography'` to `globals.css`. MessageBubble conditionally renders `<ReactMarkdown>` for assistant messages with `prose` classes for typography.

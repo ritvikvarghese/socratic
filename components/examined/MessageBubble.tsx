@@ -1,5 +1,6 @@
 "use client";
 
+import ReactMarkdown from "react-markdown";
 import { ThinkingIndicator } from "./ThinkingIndicator";
 
 export interface Message {
@@ -40,7 +41,13 @@ export function MessageBubble({ message, isLatest = false }: MessageBubbleProps)
           <ThinkingIndicator />
         ) : (
           <>
-            <p className="whitespace-pre-wrap">{message.content}</p>
+            {isUser ? (
+              <p className="whitespace-pre-wrap">{message.content}</p>
+            ) : (
+              <div className="prose prose-warm max-w-none prose-p:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-headings:my-3 prose-headings:font-semibold prose-strong:font-semibold prose-a:text-foreground prose-a:underline">
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              </div>
+            )}
             {message.timestamp && (
               <time className="block mt-2 text-xs text-muted-foreground/70">
                 {message.timestamp.toLocaleTimeString([], {
