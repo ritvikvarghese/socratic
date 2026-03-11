@@ -13,8 +13,9 @@ export function useChat(conversationId: string | null) {
   }, []);
 
   const sendMessage = useCallback(
-    async (content: string) => {
-      if (!conversationId || isLoading) return;
+    async (content: string, overrideConversationId?: string) => {
+      const activeId = overrideConversationId || conversationId;
+      if (!activeId || isLoading) return;
 
       const userMessage: Message = {
         id: Date.now().toString(),
@@ -37,7 +38,7 @@ export function useChat(conversationId: string | null) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            conversationId,
+            conversationId: activeId,
             message: content,
             messageHistory,
           }),

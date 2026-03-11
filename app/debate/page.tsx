@@ -65,8 +65,7 @@ export default function DebatePage() {
         const id = await createConversation();
         if (id) {
           setActiveSessionId(id);
-          // Small delay to let state update, then send
-          setTimeout(() => sendMessage(content), 0);
+          sendMessage(content, id);
         }
         return;
       }
