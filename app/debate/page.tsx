@@ -43,11 +43,11 @@ export default function DebatePage() {
         if (res.ok) {
           const data = await res.json();
           loadMessages(
-            data.messages.map((m: { id: string; role: string; content: string; created_at: string }) => ({
+            data.messages.map((m: { id: string; role: string; content: string; createdAt: string }) => ({
               id: m.id,
               role: m.role as "user" | "assistant",
               content: m.content,
-              timestamp: new Date(m.created_at),
+              timestamp: new Date(m.createdAt),
             }))
           );
         }
