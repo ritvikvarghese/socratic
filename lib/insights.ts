@@ -57,7 +57,8 @@ ${conversationSummaries}`,
     ],
   })
 
-  const text = response.content[0].type === 'text' ? response.content[0].text : ''
+  const rawText = response.content[0].type === 'text' ? response.content[0].text : ''
+  const text = rawText.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '').trim()
 
   try {
     const parsed = JSON.parse(text) as Array<{ type: string; label: string; count: number }>
@@ -87,8 +88,8 @@ ${conversationSummaries}`,
     }
 
     return insights
-  } catch {
-    // If Claude returns invalid JSON, return cached insights
+  } catch (e) {
+    console.error('Failed to parse insights from Claude:', e, 'Raw response:', rawText)
     const cached = await prisma.insightsCache.findMany({
       where: { userId: 'default_user' },
       orderBy: { count: 'desc' },
