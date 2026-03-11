@@ -10,7 +10,7 @@ import { useConversations } from "@/hooks/use-conversations";
 export default function DebatePage() {
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { conversations, createConversation, refreshConversations } = useConversations();
+  const { conversations, createConversation, deleteConversation, refreshConversations } = useConversations();
   const { messages, isLoading, title, sendMessage, loadMessages, clearMessages } = useChat(activeSessionId);
 
   // When a title is generated from the first message, refresh the sidebar
@@ -58,6 +58,17 @@ export default function DebatePage() {
     [loadMessages]
   );
 
+  const handleDeleteSession = useCallback(
+    async (id: string) => {
+      await deleteConversation(id);
+      if (activeSessionId === id) {
+        setActiveSessionId(null);
+        clearMessages();
+      }
+    },
+    [deleteConversation, activeSessionId, clearMessages]
+  );
+
   const handleSendMessage = useCallback(
     async (content: string) => {
       // If no active session, create one first
@@ -83,6 +94,7 @@ export default function DebatePage() {
           activeSessionId={activeSessionId ?? undefined}
           onSelectSession={handleSelectSession}
           onNewDebate={handleNewDebate}
+          onDeleteSession={handleDeleteSession}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />

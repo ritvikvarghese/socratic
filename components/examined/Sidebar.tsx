@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
+import { Plus, X, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface DebateSession {
@@ -15,6 +15,7 @@ interface SidebarProps {
   activeSessionId?: string;
   onSelectSession: (id: string) => void;
   onNewDebate: () => void;
+  onDeleteSession?: (id: string) => void;
   isOpen?: boolean;
   onClose?: () => void;
 }
@@ -24,6 +25,7 @@ export function Sidebar({
   activeSessionId,
   onSelectSession,
   onNewDebate,
+  onDeleteSession,
   isOpen = true,
   onClose,
 }: SidebarProps) {
@@ -95,22 +97,36 @@ export function Sidebar({
         <div className="flex-1 overflow-y-auto px-3 pb-4">
           <div className="space-y-1">
             {sessions.map((session) => (
-              <button
+              <div
                 key={session.id}
-                onClick={() => {
-                  onSelectSession(session.id);
-                  onClose?.();
-                }}
                 className={`
-                  w-full text-left px-3 py-3 rounded-xl transition-all
+                  group relative w-full text-left px-3 py-3 rounded-xl transition-all cursor-pointer
                   ${activeSessionId === session.id
                     ? "bg-sand border-l-2 border-l-warm-brown"
                     : "hover:bg-muted/50"
                   }
                 `}
+                onClick={() => {
+                  onSelectSession(session.id);
+                  onClose?.();
+                }}
               >
+                {/* Delete button - visible on hover */}
+                {onDeleteSession && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.confirm("Delete this conversation? This cannot be undone.")) {
+                        onDeleteSession(session.id);
+                      }
+                    }}
+                    className="absolute top-2 right-2 p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
                 {/* Title - Cormorant Garamond medium */}
-                <span className="block font-serif font-medium text-[15px] text-foreground truncate leading-relaxed">
+                <span className="block font-serif font-medium text-[15px] text-foreground truncate leading-relaxed pr-6">
                   {session.title}
                 </span>
                 {/* Subtitle - first line preview */}
@@ -123,7 +139,7 @@ export function Sidebar({
                 <span className="block text-xs text-muted-foreground/70 mt-1">
                   {formatDate(session.date)}
                 </span>
-              </button>
+              </div>
             ))}
           </div>
 

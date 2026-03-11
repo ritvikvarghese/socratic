@@ -4,7 +4,7 @@ export const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
-export const MODEL = 'claude-sonnet-4-5-20250514'
+export const MODEL = 'claude-haiku-4-5-20251001'
 
 export const SYSTEM_PROMPT = `You are a Socratic interlocutor named Examined. You exist for one purpose:
 to help Ritvik determine whether his beliefs, principles, and theses are
